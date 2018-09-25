@@ -21,7 +21,8 @@ vector :: Double -> Double -> Double -> Quadruple
 vector a b c = Quadruple {x = a, y = b, z = c, w = 0.0}
 
 isPoint :: Quadruple -> Bool
-isPoint q = w q == 1.0
+isPoint Quadruple{w = f} = case f of 1.0  -> True
+                                     _ -> False
 
 
 isVector :: Quadruple -> Bool
