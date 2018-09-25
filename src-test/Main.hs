@@ -62,4 +62,18 @@ testSuite = do
     let v = vector 5 6 7
     it "p - v == point(-2, -4, -6)" $
       p - v == point (-2) (-4) (-6)
-      
+  describe "Subtracting two vectors" $ do
+    let v1 = vector 3 2 1
+    let v2 = vector 5 6 7
+    it "v1 - v2 == vector(-2, -4, -6)" $
+      v1 - v2 == vector (-2) (-4) (-6)
+  describe "Subtracting a vector from the zero vector" $ do
+    let zero = vector 0 0 0
+    let v = vector 1 (-2) 3
+    it "zero - v = vector(-1, 2, -3)" $
+      zero - v == vector (-1) 2 (-3)
+  describe "Negating a tuple" $ do
+    let a = Quadruple 1 (-2) 3 (-4)
+    it "-a = tuple (-1, 2, -3, 4)" $
+      (-a) == Quadruple (-1) 2 (-3) 4
+
