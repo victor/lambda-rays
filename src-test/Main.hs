@@ -157,3 +157,13 @@ testSuite = do
       let b = vector 2 3 4
       it "dot(a, b) = 20" $
         (a `dot` b) `shouldBe` 20
+
+  describe "Cross Product" $ do
+    describe "Cross product of two vectors" $ do
+      let a = vector 1 2 3
+      let b = vector 2 3 4
+      it "a ⨯ b = vector(-1, 2, -1)" $
+        a ⨯ b `shouldBe` vector (-1) 2 (-1)
+      it "b ⨯ a = vector(1, -2, 1)" $
+        b ⨯ a `shouldBe` vector 1 (-2) 1
+        
