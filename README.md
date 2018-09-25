@@ -7,7 +7,8 @@ Please read file `tutorial.md` for first steps in using the template.
 
 *Notes*
 
-* Use Point and Vector as Constructors for Quadruple?
-* Use vmap to avoid code repetition
+
+[x] Use vmap to avoid code repetition
+[ ] Refactor internal implementation to use a list, which will allow more expresiveness in algorithms 
 
 

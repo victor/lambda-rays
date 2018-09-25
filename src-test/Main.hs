@@ -150,3 +150,10 @@ testSuite = do
       let n = normalize v
       it "magnitude(norm) = 1" $
         magnitude n `shouldBe` 1
+
+  describe "Dot Product" $ do
+    describe "The dot product of two tuples" $ do
+      let a = vector 1 2 3
+      let b = vector 2 3 4
+      it "dot(a, b) = 20" $
+        (a `dot` b) `shouldBe` 20
