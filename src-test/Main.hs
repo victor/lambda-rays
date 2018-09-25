@@ -135,3 +135,18 @@ testSuite = do
       it "magnitude(v) = √14" $
         magnitude v `shouldBe` sqrt 14
         
+  describe "Vector normalization" $ do
+
+    describe "Normalizing vector(4, 0, 0) gives (1, 0, 0)" $ do
+      let v = vector 4 0 0
+      it "normalize(v) = vector(1, 0, 0)" $ 
+        normalize v `shouldBe` vector 1 0 0
+    describe "Normalizing vector(1, 2, 3)" $ do
+      let v = vector 1 2 3
+      it "normalize(v) = ~= vector(0.26726, 0.53452, 0.80178)" $ 
+        normalize v `shouldBe` vector 0.2672612419124244 0.5345224838248488 0.8017837257372732
+    describe "The magnitude of a normalized vector" $ do
+      let v = vector 1 2 3
+      let n = normalize v
+      it "magnitude(norm) = 1" $
+        magnitude n `shouldBe` 1
