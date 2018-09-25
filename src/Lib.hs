@@ -14,6 +14,9 @@ module Lib
     ,normalize
     ,dot
     ,(⨯)
+    ,World(..)
+    ,Projectile(..)
+    ,tick
   ) where
 
 
@@ -71,4 +74,10 @@ dot a b = ((x a) * (x b)) +
 (⨯) :: Quadruple -> Quadruple -> Quadruple
 (⨯) a b = vector (((y a)*(z b))-((z a)*(y b))) (((z a)*(x b))-((x a)*(z b))) (((x a)*(y b))-((y a)*(x b)))
 
+data World = World { gravity, wind :: Quadruple} deriving (Eq, Show)
+
+data Projectile = Projectile { position, velocity :: Quadruple} deriving (Eq, Show)
+
+tick :: World -> Projectile -> Projectile
+tick world p0 = Projectile { position = position p0 + velocity p0, velocity = velocity p0 + gravity world + wind world }
 
