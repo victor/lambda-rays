@@ -16,6 +16,8 @@ module Lib
 
 data Quadruple = Quadruple { x, y, z, w :: Double } deriving (Eq, Show)
 
+qmap :: Quadruple -> (Double -> Double) -> Quadruple
+qmap q fn = Quadruple (fn (x q)) (fn (y q)) (fn (z q)) (fn (w q))
 
 point :: Double -> Double -> Double -> Quadruple
 point a b c = Quadruple {x = a, y = b, z = c, w = 1.0}
@@ -32,7 +34,7 @@ isVector :: Quadruple -> Bool
 isVector q = w q == 0.0
 
 (*|) :: Double -> Quadruple -> Quadruple
-(*|) f q1 = Quadruple (x q1 * f) (y q1 * f) (z q1 * f) (w q1 * f)
+(*|) f q1 = qmap q1 (\v -> v * f)
 
 (|*) :: Quadruple -> Double -> Quadruple
 (|*) q1 f = f *| q1
