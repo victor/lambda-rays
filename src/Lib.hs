@@ -11,6 +11,7 @@ module Lib
     (|*),
     (÷),
     magnitude
+    ,normalize
   ) where
 
 
@@ -55,3 +56,7 @@ instance Num Quadruple where
   
 magnitude :: Quadruple -> Double
 magnitude q = sqrt ((x q)**2 + (y q)**2 + (z q)**2)
+
+normalize :: Quadruple -> Quadruple
+normalize q = qmap q ( / magnitude q)
+
