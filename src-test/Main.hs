@@ -76,4 +76,7 @@ testSuite = do
     let a = Quadruple 1 (-2) 3 (-4)
     it "-a = tuple (-1, 2, -3, 4)" $
       (-a) == Quadruple (-1) 2 (-3) 4
-
+  describe "Multiplying a tuple by a scalar" $ do
+    let a = Quadruple 1 (-2) 3 (-4)
+    it "a *| 3.5 = tuple(3.5, -7, 10.5, -14)" $
+      3.5 *| a == Quadruple 3.5 (-7) 10.5 (-14)

@@ -6,7 +6,8 @@ module Lib
     point,
     isPoint,
     vector,
-    isVector
+    isVector,
+    (*|)
   ) where
 
 
@@ -28,8 +29,8 @@ isPoint Quadruple{w = f} = case f of 1.0  -> True
 isVector :: Quadruple -> Bool
 isVector q = w q == 0.0
 
--- (+) :: Quadruple -> Quadruple -> Quadruple
--- (+) q1 q2 = Quadruple (x q1 Prelude.+ x q2) (y q1 Prelude.+ y q2) (z q1 Prelude.+ z q2) (w q1 Prelude.+ w q2)
+(*|) :: Double -> Quadruple -> Quadruple
+(*|) f q1 = Quadruple (x q1 * f) (y q1 * f) (z q1 * f) (w q1 * f)
 
 
 instance Num Quadruple where
@@ -39,3 +40,5 @@ instance Num Quadruple where
   signum (Quadruple _ _ _ _) = undefined
   fromInteger _ = undefined
   negate (Quadruple x1 y1 z1 w1) = Quadruple (negate x1) (negate y1) (negate z1) (negate w1)
+
+  
