@@ -28,4 +28,14 @@ isPoint Quadruple{w = f} = case f of 1.0  -> True
 isVector :: Quadruple -> Bool
 isVector q = w q == 0.0
 
+-- (+) :: Quadruple -> Quadruple -> Quadruple
+-- (+) q1 q2 = Quadruple (x q1 Prelude.+ x q2) (y q1 Prelude.+ y q2) (z q1 Prelude.+ z q2) (w q1 Prelude.+ w q2)
 
+
+instance Num Quadruple where
+  Quadruple x1 y1 z1 w1 + Quadruple x2 y2 z2 w2 = Quadruple (x1 + x2) (y1 + y2) (z1 + z2) (w1 + w2)
+  Quadruple _ _ _ _  * Quadruple _ _ _ _ = undefined
+  abs (Quadruple _ _ _ _) = undefined
+  signum (Quadruple _ _ _ _) = undefined
+  fromInteger _ = undefined
+  negate (Quadruple _ _ _ _) = undefined
