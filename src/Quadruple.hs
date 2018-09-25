@@ -1,5 +1,5 @@
 -- | Example of a library file. It is also used for testing the test suites.
-module Lib
+module Quadruple
   (
     -- * Exported functions
     Quadruple(..),
@@ -14,9 +14,6 @@ module Lib
     ,normalize
     ,dot
     ,(⨯)
-    ,World(..)
-    ,Projectile(..)
-    ,tick
   ) where
 
 
@@ -65,7 +62,7 @@ instance Num Quadruple where
   fromInteger _ = undefined
   negate a = qmap a negate
 
-  
+
 magnitude :: Quadruple -> Double
 magnitude q = sqrt ((x q)**2 + (y q)**2 + (z q)**2)
 
@@ -80,11 +77,3 @@ dot a b = ((x a) * (x b)) +
 
 (⨯) :: Quadruple -> Quadruple -> Quadruple
 (⨯) a b = vector (((y a)*(z b))-((z a)*(y b))) (((z a)*(x b))-((x a)*(z b))) (((x a)*(y b))-((y a)*(x b)))
-
-data World = World { gravity, wind :: Quadruple} deriving (Eq, Show)
-
-data Projectile = Projectile { position, velocity :: Quadruple} deriving (Eq, Show)
-
-tick :: World -> Projectile -> Projectile
-tick world p0 = Projectile { position = position p0 + velocity p0, velocity = velocity p0 + gravity world + wind world }
-

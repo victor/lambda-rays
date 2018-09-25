@@ -1,7 +1,8 @@
 import Test.Tasty
 import Test.Tasty.Hspec
 
-import Lib 
+import Quadruple
+import Projectile
 
 main :: IO ()
 main = do
@@ -103,7 +104,7 @@ testSuite = do
       let a = Quadruple 1 (-2) 3 (-4)
       it "a * 0.5 = tuple(0.5, -1, 1.5, -2)" $
         a |* 0.5 `shouldBe` Quadruple 0.5 (-1) 1.5 (-2)
-    
+
     describe "Dividing a tuple by a scalar" $ do
       let a = Quadruple 1 (-2) 3 (-4)
       it "a ÷ 2 =  tuple(0.5, -1, 1.5, -2)" $
@@ -129,21 +130,21 @@ testSuite = do
       let v = vector 1 2 3
       it "magnitude(v) = √14" $
         magnitude v `shouldBe` sqrt 14
-            
+
     describe "Magnitude of vector(-1, -2, -3)" $ do
       let v = vector (-1) (-2) (-3)
       it "magnitude(v) = √14" $
         magnitude v `shouldBe` sqrt 14
-        
+
   describe "Vector normalization" $ do
 
     describe "Normalizing vector(4, 0, 0) gives (1, 0, 0)" $ do
       let v = vector 4 0 0
-      it "normalize(v) = vector(1, 0, 0)" $ 
+      it "normalize(v) = vector(1, 0, 0)" $
         normalize v `shouldBe` vector 1 0 0
     describe "Normalizing vector(1, 2, 3)" $ do
       let v = vector 1 2 3
-      it "normalize(v) = ~= vector(0.26726, 0.53452, 0.80178)" $ 
+      it "normalize(v) = ~= vector(0.26726, 0.53452, 0.80178)" $
         normalize v `shouldBe` vector 0.2672612419124244 0.5345224838248488 0.8017837257372732
     describe "The magnitude of a normalized vector" $ do
       let v = vector 1 2 3
@@ -166,17 +167,17 @@ testSuite = do
         a ⨯ b `shouldBe` vector (-1) 2 (-1)
       it "b ⨯ a = vector(1, -2, 1)" $
         b ⨯ a `shouldBe` vector 1 (-2) 1
-        
+
   describe "Projectile" $ do
     describe "initial moment" $ do
       let world = World{ gravity = vector 0 (-9.8) 0, wind = vector 0 0 0}
       let p = Projectile { position = point 0 9.8 0, velocity = vector 0 0 0}
-      it "After 0 second without velocity, position shouldn't change, velocity has increased" $ do 
+      it "After 0 second without velocity, position shouldn't change, velocity has increased" $ do
         let p1 = tick world p
         position p1 `shouldBe` point 0 9.8 0
         velocity p1 `shouldBe` vector 0 (-9.8) 0
-      it "After 1 second without velocity, position is ground level, velocity has doubled" $ do 
+      it "After 1 second without velocity, position is ground level, velocity has doubled" $ do
         let p1 = tick world (tick world p)
         position p1 `shouldBe` point 0 0 0
         velocity p1 `shouldBe` vector 0 (-19.6) 0
-  
+
