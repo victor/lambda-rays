@@ -23,6 +23,13 @@ data Quadruple = Quadruple { x, y, z, w :: Double } deriving (Eq, Show)
 qmap :: Quadruple -> (Double -> Double) -> Quadruple
 qmap q fn = Quadruple (fn (x q)) (fn (y q)) (fn (z q)) (fn (w q))
 
+toList :: Quadruple -> [Double]
+toList Quadruple { x = x1,  y = y1, z = z1, w = w1 } = [x1, y1, z1, w1]
+
+fromList :: [Double] -> Quadruple
+fromList [a, b, c, d] = (Quadruple {x = a, y = b, z = c, w = d})
+fromList _ = undefined
+
 point :: Double -> Double -> Double -> Quadruple
 point a b c = Quadruple {x = a, y = b, z = c, w = 1.0}
 
@@ -48,7 +55,7 @@ isVector q = w q == 0.0
 
 
 instance Num Quadruple where
-  Quadruple x1 y1 z1 w1 + Quadruple x2 y2 z2 w2 = Quadruple (x1 + x2) (y1 + y2) (z1 + z2) (w1 + w2)
+  q1 + q2 = fromList (zipWith (+) (toList (q1)) (toList (q2)))
   Quadruple _ _ _ _  * Quadruple _ _ _ _ = undefined
   abs (Quadruple _ _ _ _) = undefined
   signum (Quadruple _ _ _ _) = undefined
