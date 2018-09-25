@@ -12,6 +12,7 @@ module Lib
     (÷),
     magnitude
     ,normalize
+    ,dot
   ) where
 
 
@@ -59,4 +60,10 @@ magnitude q = sqrt ((x q)**2 + (y q)**2 + (z q)**2)
 
 normalize :: Quadruple -> Quadruple
 normalize q = qmap q ( / magnitude q)
+
+dot :: Quadruple -> Quadruple -> Double
+dot a b = ((x a) * (x b)) +
+  ((y a) * (y b)) +
+  ((z a) * (z b)) +
+  ((w a) * (w b))
 
