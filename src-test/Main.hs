@@ -102,3 +102,7 @@ testSuite = do
     it "a * 0.5 = tuple(0.5, -1, 1.5, -2)" $
       a |* 0.5 == Quadruple 0.5 (-1) 1.5 (-2)
   
+  describe "Dividing a tuple by a scalar" $ do
+    let a = Quadruple 1 (-2) 3 (-4)
+    it "a ÷ 2 =  tuple(0.5, -1, 1.5, -2)" $
+      a ÷ 2 == Quadruple 0.5 (-1) 1.5 (-2)
