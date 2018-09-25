@@ -9,6 +9,7 @@ module Lib
     isVector,
     (*|),
     (|*),
+    (÷)
   ) where
 
 
@@ -35,6 +36,9 @@ isVector q = w q == 0.0
 
 (|*) :: Quadruple -> Double -> Quadruple
 (|*) q1 f = f *| q1
+
+(÷) :: Quadruple -> Double -> Quadruple
+(÷) q1 d = Quadruple (x q1 / d) (y q1 / d) (z q1 / d) (w q1 / d)
 
 
 instance Num Quadruple where
