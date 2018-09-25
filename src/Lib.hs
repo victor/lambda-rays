@@ -35,13 +35,13 @@ isVector :: Quadruple -> Bool
 isVector q = w q == 0.0
 
 (*|) :: Double -> Quadruple -> Quadruple
-(*|) f q1 = qmap q1 (\v -> v * f)
+(*|) f q1 = qmap q1 (* f)
 
 (|*) :: Quadruple -> Double -> Quadruple
 (|*) q1 f = f *| q1
 
 (÷) :: Quadruple -> Double -> Quadruple
-(÷) q1 d = Quadruple (x q1 / d) (y q1 / d) (z q1 / d) (w q1 / d)
+(÷) q1 d = qmap q1 (/ d)
 
 
 instance Num Quadruple where
@@ -50,7 +50,7 @@ instance Num Quadruple where
   abs (Quadruple _ _ _ _) = undefined
   signum (Quadruple _ _ _ _) = undefined
   fromInteger _ = undefined
-  negate (Quadruple x1 y1 z1 w1) = Quadruple (negate x1) (negate y1) (negate z1) (negate w1)
+  negate a = qmap a negate
 
   
 magnitude :: Quadruple -> Double
