@@ -88,9 +88,12 @@ testSuite = do
 
   describe "Multiplying a tuple by a scalar" $ do
     let a = Quadruple 1 (-2) 3 (-4)
-    it "a *| 3.5 = tuple(3.5, -7, 10.5, -14)" $
-      3.5 *| a == Quadruple 3.5 (-7) 10.5 (-14)
-
+    describe "Scalar by Tuple" $ do
+      it "3.5 *| a = tuple(3.5, -7, 10.5, -14)" $
+        3.5 *| a == Quadruple 3.5 (-7) 10.5 (-14)
+    describe "Tuple by Scalar" $ do
+      it "a *| 3.5 = tuple(3.5, -7, 10.5, -14)" $
+        a |* 3.5 == Quadruple 3.5 (-7) 10.5 (-14)
   describe "Multiplying a tuple by a fraction" $ do
     let a = Quadruple 1 (-2) 3 (-4)
     it "a * 0.5 = tuple(0.5, -1, 1.5, -2)" $
