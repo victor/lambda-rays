@@ -109,3 +109,29 @@ testSuite = do
       it "a ÷ 2 =  tuple(0.5, -1, 1.5, -2)" $
         a ÷ 2 `shouldBe` Quadruple 0.5 (-1) 1.5 (-2)
 
+  describe "Magnitude" $ do
+    describe "Magnitude of vector(1, 0, 0)" $ do
+      let v = vector 1 0 0
+      it "magnitude(v) = 1" $
+        magnitude v `shouldBe` 1.0
+
+    describe "Magnitude of vector(0, 1, 0)" $ do
+      let v = vector 0 1 0
+      it "magnitude(v) = 1" $
+        magnitude v `shouldBe` 1.0
+
+    describe "Magnitude of vector(0, 0, 1)" $ do
+      let v = vector 0 0 1
+      it "magnitude(v) = 1" $
+        magnitude v `shouldBe` 1.0
+
+    describe "Magnitude of vector(1, 2, 3)" $ do
+      let v = vector 1 2 3
+      it "magnitude(v) = √14" $
+        magnitude v `shouldBe` sqrt 14
+            
+    describe "Magnitude of vector(-1, -2, -3)" $ do
+      let v = vector (-1) (-2) (-3)
+      it "magnitude(v) = √14" $
+        magnitude v `shouldBe` sqrt 14
+        
