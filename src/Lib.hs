@@ -13,6 +13,7 @@ module Lib
     magnitude
     ,normalize
     ,dot
+    ,(⨯)
   ) where
 
 
@@ -66,4 +67,8 @@ dot a b = ((x a) * (x b)) +
   ((y a) * (y b)) +
   ((z a) * (z b)) +
   ((w a) * (w b))
+
+(⨯) :: Quadruple -> Quadruple -> Quadruple
+(⨯) a b = vector (((y a)*(z b))-((z a)*(y b))) (((z a)*(x b))-((x a)*(z b))) (((x a)*(y b))-((y a)*(x b)))
+
 
