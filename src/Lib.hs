@@ -11,7 +11,7 @@ module Lib
 
 
 
-data Quadruple = Quadruple { x, y, z, w :: Double } deriving (Show)
+data Quadruple = Quadruple { x, y, z, w :: Double } deriving (Eq, Show)
 
 
 point :: Double -> Double -> Double -> Quadruple

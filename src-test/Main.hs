@@ -39,3 +39,11 @@ testSuite = do
      isPoint v `shouldBe` False
     it "is a vector" $
      isVector v `shouldBe` True
+  describe "'point' describes tuples with w=1" $ do
+    let p = point 4 (-4) 3
+    it "p = tuple(4, -4, 3, 1)" $
+      p == Quadruple 4 (-4) 3 1
+  describe "'vector' describes tuples with w=0" $ do
+    let v = vector 4 (-4) 3
+    it "v = tuple(4, -4, 3, 0)" $
+      v == Quadruple 4 (-4) 3 0
