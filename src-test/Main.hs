@@ -52,3 +52,9 @@ testSuite = do
     let a2 = Quadruple (-2) 3 1 0
     it "a1 + a2 = (1, 1, 6, 1)" $
       a1 + a2 == Quadruple 1 1 6 1
+  describe "Subtracting two points" $ do
+    let p1 = point 3 2 1
+    let p2 = point 5 6 7
+    it "p1 - p2 == vector (-2, -4, -6)" $
+      p1 - p2 == vector (-2) (-4) (-6)
+

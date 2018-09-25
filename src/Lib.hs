@@ -38,4 +38,4 @@ instance Num Quadruple where
   abs (Quadruple _ _ _ _) = undefined
   signum (Quadruple _ _ _ _) = undefined
   fromInteger _ = undefined
-  negate (Quadruple _ _ _ _) = undefined
+  negate (Quadruple x1 y1 z1 w1) = Quadruple (negate x1) (negate y1) (negate z1) (negate w1)
