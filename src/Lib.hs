@@ -7,7 +7,8 @@ module Lib
     isPoint,
     vector,
     isVector,
-    (*|)
+    (*|),
+    (|*),
   ) where
 
 
@@ -31,6 +32,9 @@ isVector q = w q == 0.0
 
 (*|) :: Double -> Quadruple -> Quadruple
 (*|) f q1 = Quadruple (x q1 * f) (y q1 * f) (z q1 * f) (w q1 * f)
+
+(|*) :: Quadruple -> Double -> Quadruple
+(|*) q1 f = f *| q1
 
 
 instance Num Quadruple where
