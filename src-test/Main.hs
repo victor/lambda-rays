@@ -57,4 +57,9 @@ testSuite = do
     let p2 = point 5 6 7
     it "p1 - p2 == vector (-2, -4, -6)" $
       p1 - p2 == vector (-2) (-4) (-6)
-
+  describe "Subtracting a vector from a point" $ do
+    let p = point 3 2 1
+    let v = vector 5 6 7
+    it "p - v == point(-2, -4, -6)" $
+      p - v == point (-2) (-4) (-6)
+      
