@@ -9,7 +9,8 @@ module Lib
     isVector,
     (*|),
     (|*),
-    (÷)
+    (÷),
+    magnitude
   ) where
 
 
@@ -52,3 +53,5 @@ instance Num Quadruple where
   negate (Quadruple x1 y1 z1 w1) = Quadruple (negate x1) (negate y1) (negate z1) (negate w1)
 
   
+magnitude :: Quadruple -> Double
+magnitude q = sqrt ((x q)**2 + (y q)**2 + (z q)**2)
