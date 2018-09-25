@@ -47,3 +47,8 @@ testSuite = do
     let v = vector 4 (-4) 3
     it "v = tuple(4, -4, 3, 0)" $
       v == Quadruple 4 (-4) 3 0
+  describe "Quadruple addition" $ do
+    let a1 = Quadruple 3 (-2) 5 1
+    let a2 = Quadruple (-2) 3 1 0
+    it "a1 + a2 = (1, 1, 6, 1)" $
+      a1 + a2 == Quadruple 1 1 6 1
