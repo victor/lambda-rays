@@ -21,7 +21,7 @@ module Quadruple
 data Quadruple = Quadruple { x, y, z, w :: Double } deriving (Eq, Show)
 
 qmap :: Quadruple -> (Double -> Double) -> Quadruple
-qmap q fn = Quadruple (fn (x q)) (fn (y q)) (fn (z q)) (fn (w q))
+qmap q fn = fromList $ map fn (toList q)
 
 toList :: Quadruple -> [Double]
 toList Quadruple { x = x1,  y = y1, z = z1, w = w1 } = [x1, y1, z1, w1]
