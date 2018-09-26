@@ -28,7 +28,7 @@ library
   default-language:  Haskell2010
   ghc-options:       -Wall -Werror -O2
   hs-source-dirs:    src
-  exposed-modules:   Quadruple,Projectile
+  exposed-modules:   Quadruple,Projectile,Canvas
   build-depends:     base >= 4.8 && < 5
 
 executable lambda-rays
@@ -55,6 +55,7 @@ test-suite lambda-rays-test
   other-modules:
       QuadrupleSpec
       ProjectileSpec
+      CanvasSpec
 
 test-suite lambda-rays-doctest
   type:              exitcode-stdio-1.0
