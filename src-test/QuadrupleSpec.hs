@@ -1,3 +1,5 @@
+{-# OPTIONS_GHC -fno-warn-type-defaults #-}
+
 module QuadrupleSpec where
 
 import Test.Tasty.Hspec
@@ -8,9 +10,9 @@ spec_quadruple :: Spec
 spec_quadruple = do
   describe "Tuples components" $ do
     describe "A tuple with w == 1.0 is a point" $ do
-      let p = Quadruple 4.3 (-4.2) 3.1 1.0
+      let p = Quadruple (4.3 :: Double) ((-4.2) :: Double) (3.1 :: Double) (1.0 :: Double)
       it "x == 4.3" $
-        x p `shouldBe` 4.3
+        x p `shouldBe` (4.3 :: Double)
       it "y == -4.2" $
         y p `shouldBe` (-4.2)
       it "z == 3.1" $
