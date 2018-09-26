@@ -8,9 +8,9 @@ module Projectile
 
 import Quadruple
 
-data World = World { gravity, wind :: Quadruple} deriving (Eq, Show)
+data World = World { gravity, wind :: Quadruple Double} deriving (Eq, Show)
 
-data Projectile = Projectile { position, velocity :: Quadruple} deriving (Eq, Show)
+data Projectile = Projectile { position, velocity :: Quadruple Double} deriving (Eq, Show)
 
 tick :: World -> Projectile -> Projectile
 tick world p0 = Projectile { position = position p0 + velocity p0, velocity = velocity p0 + gravity world + wind world }
