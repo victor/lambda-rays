@@ -1,3 +1,5 @@
+{-# OPTIONS_GHC -fno-warn-type-defaults #-}
+
 import Test.Tasty
 import Test.Tasty.Hspec
 
@@ -14,9 +16,9 @@ testSuite :: Spec
 testSuite = do
   describe "Tuples components" $ do
     describe "A tuple with w == 1.0 is a point" $ do
-      let p = Quadruple 4.3 (-4.2) 3.1 1.0
+      let p = Quadruple (4.3 :: Double) ((-4.2) :: Double) (3.1 :: Double) (1.0 :: Double)
       it "x == 4.3" $
-        x p `shouldBe` 4.3
+        x p `shouldBe` (4.3 :: Double)
       it "y == -4.2" $
         y p `shouldBe` (-4.2)
       it "z == 3.1" $
@@ -162,9 +164,9 @@ testSuite = do
   describe "Cross Product" $ do
     describe "Cross product of two vectors" $ do
       let a = vector 1 2 3
-      let b = vector 2 3 4
+      let b = vector 2.0 3.0 4.0
       it "a ⨯ b = vector(-1, 2, -1)" $
-        a ⨯ b `shouldBe` vector (-1) 2 (-1)
+        a ⨯ b `shouldBe` vector (-1.0) 2.0 (-1.0)
       it "b ⨯ a = vector(1, -2, 1)" $
         b ⨯ a `shouldBe` vector 1 (-2) 1
 
