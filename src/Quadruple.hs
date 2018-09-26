@@ -21,7 +21,7 @@ module Quadruple
 data Quadruple a = Quadruple { x, y, z, w :: a } deriving (Eq, Show)
 
 qmap :: (Floating a) => Quadruple a -> (a -> a) -> Quadruple a
-qmap q fn = Quadruple (fn (x q)) (fn (y q)) (fn (z q)) (fn (w q))
+qmap q fn = fromList $ map fn (toList q)
 
 toList :: (Floating a) => Quadruple a -> [a]
 toList Quadruple { x = x1,  y = y1, z = z1, w = w1 } = [x1, y1, z1, w1]
@@ -37,8 +37,8 @@ vector :: (Floating a) => a -> a -> a -> Quadruple a
 vector a b c = Quadruple {x = a, y = b, z = c, w = 0.0}
 
 isPoint :: (Floating a, Eq a) => Quadruple a -> Bool
-isPoint Quadruple {w = f} = case f of 1.0  -> True
-                                      _ -> False
+isPoint Quadruple{w = f} = case f of 1.0  -> True
+                                     _ -> False
 
 
 isVector :: (Floating a, Eq a) => Quadruple a -> Bool
