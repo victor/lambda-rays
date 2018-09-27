@@ -36,6 +36,15 @@ spec_canvas = do
             it "c1 ⨯ c2 == Color (0.9, 0.2, 0.04)" $
               c1 ⨯ c2 ~= Color (0.9, 0.2, 0.04)
 
+    describe "Creating a Canvas" $ do
+        let c = createCanvas 10 20
+        it "c.width == 10" $
+          width c `shouldBe` 10
+        it "c.height == 20" $
+          height c `shouldBe` 20
+        it "every pixel of c is Color(0,0,0)" $
+            True `shouldBe` all (Color (0,0,0) ==) (allPixels c)
+
 
 -- This should be factored out, probably
 -- For now keeping it close to edit it more conveniently
