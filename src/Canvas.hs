@@ -1,3 +1,5 @@
+{-# OPTIONS_GHC -fno-warn-type-defaults #-}
+
 module Canvas (
     Color(..)
     ,red
@@ -12,6 +14,7 @@ module Canvas (
     ,allPixels
     ,pixelAt
     ,writePixelAt
+    ,ppmFromCanvas
 ) where
 
 import Data.Array
@@ -77,8 +80,30 @@ height (Canvas m) = 1 + snd ( snd (bounds m))
 allPixels :: Canvas -> [Color]
 allPixels (Canvas m) = elems m
 
+-- allPixelsInRows :: Canvas -> [[Color]]
+-- allPixelsInRows (Canvas m) = 
+
 pixelAt :: Canvas -> Int -> Int -> Color
 pixelAt (Canvas m) i j = m!(i, j)
 
 writePixelAt :: Canvas -> Int -> Int -> Color -> Canvas
 writePixelAt (Canvas m) i j c = Canvas (m // [((i,j), c)])
+
+ppmFromCanvas :: Canvas -> [String]
+ppmFromCanvas c = "P3" : [show w ++ " " ++ show h ] ++ ["255"] ++ pixelData c
+    where
+        w = width c
+        h = height c
+
+clamp :: Float -> Float
+clamp = round . (255.0*) . max 0.0 . min 1.0
+
+group _ [] = []
+group n xs =
+  let (xs0,xs1) = splitAt n xs
+  in  xs0 : group n xs1
+
+pixelData :: Canvas -> [String]
+-- -- pixelData m = [  map (show . clamp) [red p, green p, blue p] | p <- elems m]
+pixelData c = [ concat (map (show . clamp) (map ($ p) [red, green, blue]))
+  | p <- allPixels c]
