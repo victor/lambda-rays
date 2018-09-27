@@ -45,6 +45,13 @@ spec_canvas = do
         it "every pixel of c is Color(0,0,0)" $
             True `shouldBe` all (Color (0,0,0) ==) (allPixels c)
 
+    describe "Writing a pixel to a canvas" $ do
+        let c = createCanvas 10 20
+        let colorRed = Color (1, 0, 0)
+        let c' = writePixelAt c 2 3 colorRed
+        it "pixel 2,3 of c == colorRed" $
+          pixelAt c' 2 3 == colorRed
+
 
 -- This should be factored out, probably
 -- For now keeping it close to edit it more conveniently
