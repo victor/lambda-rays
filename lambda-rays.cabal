@@ -29,7 +29,7 @@ library
   ghc-options:       -Wall -Werror -O2
   hs-source-dirs:    src
   exposed-modules:   Quadruple,Projectile,Canvas
-  build-depends:     base >= 4.8 && < 5
+  build-depends:     base >= 4.8 && < 5, array
 
 executable lambda-rays
   default-language:  Haskell2010
