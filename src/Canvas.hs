@@ -1,15 +1,17 @@
 module Canvas (
     Color(..)
-    , red
-    , green
-    , blue
-    , (*|)
-    , (⨯)
-    , createCanvas
-    , width
-    , height
+    ,red
+    ,green
+    ,blue
+    ,(*|)
+    ,(⨯)
+    ,createCanvas
+    ,width
+    ,height
     -- , matrix
-    , allPixels
+    ,allPixels
+    ,pixelAt
+    ,writePixelAt
 ) where
 
 import Data.Array
@@ -54,12 +56,13 @@ Color (r1, g1, b1) ⨯ Color (r2, g2, b2) = Color (r1 * r2, g1 * g2, b1 * b2) --
 
 
 -- Pixel matrix
+type PixelMatrix = Array (Int, Int) Color
 
 -- For now, let's try an immutable Array type and see how that works.
-data Canvas = Canvas (Array (Int, Int) Color) deriving (Show)
+data Canvas = Canvas PixelMatrix deriving (Show)
 
 createCanvas :: Int -> Int -> Canvas
-createCanvas x y = Canvas m where m = array ((0,0), (x-1,y-1)) [ ((i,j), Color (0,0,0)) | i <- [0..x-1], j <- [0..y-1]]
+createCanvas x y = Canvas (array ((0,0), (x-1,y-1)) [ ((i,j), Color (0,0,0)) | i <- [0..x-1], j <- [0..y-1]] )
     
 width :: Canvas -> Int
 width (Canvas m) = 1 + fst ( snd (bounds m))
@@ -68,8 +71,14 @@ height :: Canvas -> Int
 height (Canvas m) = 1 + snd ( snd (bounds m))
 
 -- accessor for the inner Array
-matrix :: Canvas -> Array (Int, Int) Color
-matrix (Canvas m) = m
+-- matrix :: Canvas -> PixelMatrix
+-- matrix (Canvas m) = m
 
 allPixels :: Canvas -> [Color]
 allPixels (Canvas m) = elems m
+
+pixelAt :: Canvas -> Int -> Int -> Color
+pixelAt (Canvas m) i j = m!(i, j)
+
+writePixelAt :: Canvas -> Int -> Int -> Color -> Canvas
+writePixelAt (Canvas m) i j c = Canvas (m // [((i,j), c)])
