@@ -1,6 +1,8 @@
 lambda-rays
 ==========
 
+[![Build Status](https://travis-ci.com/victor/lambda-rays.svg?branch=master)](https://travis-ci.com/victor/lambda-rays)
+
 New Haskell project using stack template `tasty-travis`.
 
 Please read file `tutorial.md` for first steps in using the template.
