@@ -52,12 +52,24 @@ spec_canvas = do
         it "pixel 2,3 of c == colorRed" $
           pixelAt c' 2 3 == colorRed
 
-    describe "Constructing PPM header" $ do
+    describe "Constructing the PPM header" $ do
         let c = createCanvas 5 3
         let ppm = ppmFromCanvas c
         it "lines 1-3 of ppm are [P3, 5 3, 255]" $
-          take 3 ppm `shouldBe` ["P3" "5 3" "255"]
-          
+            take 3 ppm `shouldBe` ["P3", "5 3", "255"]
+
+    describe "Constructing the PPM pixel data" $ do
+        let c = createCanvas 5 3
+        let c1 = Color (1.5, 0, 0)
+        let c2 = Color (0, 0.5, 0)
+        let c3 = Color ((-0.5), 0, 1)
+        let c' = writePixelAt (writePixelAt (writePixelAt c 0 0 c1) 2 1 c2) 4 2 c3
+        it "Lines 4-6 of PPM are \n\
+\ 255 0 0 0 0 0 0 0 0 0 0 0 0 0 0 \n\
+\ 0 0 0 0 0 0 0 128 0 0 0 0 0 0 0 \n\
+\ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 255"  $
+            (drop 3 . take 3 $ ppmFromCanvas c') `shouldBe` ["255 0 0 0 0 0 0 0 0 0 0 0 0 0 0",
+            "0 0 0 0 0 0 0 128 0 0 0 0 0 0 0", "0 0 0 0 0 0 0 0 0 0 0 0 0 0 255"]
 
 
 -- This should be factored out, probably
