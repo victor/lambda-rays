@@ -15,6 +15,7 @@ module Canvas (
     ,pixelAt
     ,writePixelAt
     ,ppmFromCanvas
+    ,setAllPixelsTo
 ) where
 
 import Data.Array
@@ -106,3 +107,6 @@ group n xs =
 
 pixelData :: Canvas -> [String]
 pixelData c = map unwords ( group 15 $ concat [  map ((show . clamp) . ($ p)) [red, green, blue] | p <- allPixels c])
+
+setAllPixelsTo :: Canvas -> Color -> Canvas
+setAllPixelsTo (Canvas m) cl = Canvas (m // [ (i, cl) | i <- indices m])

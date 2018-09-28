@@ -70,6 +70,24 @@ spec_canvas = describe "Canvas" $ do
             unlines (drop 3 (lines(ppmFromCanvas c'))) `shouldBe` "255 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n" ++
             "0 0 0 0 0 0 0 128 0 0 0 0 0 0 0\n" ++  "0 0 0 0 0 0 0 0 0 0 0 0 0 0 255\n"
 
+    describe "Splitting long lines in PPM files" $ do
+        let col = Color(1, 0.8, 0.6)
+        let c = setAllPixelsTo (createCanvas 10 2) col
+        let ppm = ppmFromCanvas c
+        -- it "lines 4-7 of ppm are xxx" $
+        --   unlines (take 3 (drop 3 (lines ppm))) `shouldBe` "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204 153\n" ++ 
+        --   "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204 153\n"
+        -- Replacing this test ^^ with a check of length for every line
+        it "no line is longer than 70 characters" $
+            all (\x -> length x <=70) (lines ppm) 
+    
+    describe "PPM files are terminated by a newline" $ do
+        let c = createCanvas 5 3
+        let ppm = ppmFromCanvas c
+        it "the last character of ppm is a newline" $
+          last ppm `shouldBe` '\n'
+
+
 
 -- This should be factored out, probably
 -- For now keeping it close to edit it more conveniently
