@@ -4,10 +4,9 @@ import Test.Tasty.Hspec
 import Canvas
 
 spec_canvas :: Spec
-spec_canvas = do
-  describe "Canvas" $ do
+spec_canvas = describe "Canvas" $ do
     describe "Colors are (red, green, blue) tuples" $ do
-        let c = Color ((-0.5), 0.4, 1.7)
+        let c = Color (-0.5, 0.4, 1.7)
         it "c.red == -0.5" $
             red c `shouldBe` (-0.5)
         it "c.green == 0.4" $
@@ -43,7 +42,7 @@ spec_canvas = do
         it "c.height == 20" $
           height c `shouldBe` 20
         it "every pixel of c is Color(0,0,0)" $
-            True `shouldBe` all (Color (0,0,0) ==) (allPixels c)
+          True `shouldBe` all (Color (0,0,0) ==) (allPixels c)
 
     describe "Writing a pixel to a canvas" $ do
         let c = createCanvas 10 20
@@ -56,20 +55,20 @@ spec_canvas = do
         let c = createCanvas 5 3
         let ppm = ppmFromCanvas c
         it "lines 1-3 of ppm are [P3, 5 3, 255]" $
-            take 3 ppm `shouldBe` ["P3", "5 3", "255"]
+          unlines (take 3 (lines ppm)) `shouldBe` "P3\n5 3\n255\n"
 
     describe "Constructing the PPM pixel data" $ do
         let c = createCanvas 5 3
         let c1 = Color (1.5, 0, 0)
         let c2 = Color (0, 0.5, 0)
-        let c3 = Color ((-0.5), 0, 1)
+        let c3 = Color (-0.5, 0, 1)
         let c' = writePixelAt (writePixelAt (writePixelAt c 0 0 c1) 2 1 c2) 4 2 c3
         it "Lines 4-6 of PPM are \n\
 \ 255 0 0 0 0 0 0 0 0 0 0 0 0 0 0 \n\
 \ 0 0 0 0 0 0 0 128 0 0 0 0 0 0 0 \n\
 \ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 255"  $
-            (drop 3 . take 3 $ ppmFromCanvas c') `shouldBe` ["255 0 0 0 0 0 0 0 0 0 0 0 0 0 0",
-            "0 0 0 0 0 0 0 128 0 0 0 0 0 0 0", "0 0 0 0 0 0 0 0 0 0 0 0 0 0 255"]
+            unlines (drop 3 (lines(ppmFromCanvas c'))) `shouldBe` "255 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n" ++
+            "0 0 0 0 0 0 0 128 0 0 0 0 0 0 0\n" ++  "0 0 0 0 0 0 0 0 0 0 0 0 0 0 255\n"
 
 
 -- This should be factored out, probably
